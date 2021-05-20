@@ -12,9 +12,7 @@ if (is_uploaded_file($_FILES['upload_file']['tmp_name'])) {
   if (strpos(finfo_file($finfo, $filename), 'text/plain') === false) {
     // magic DBをクローズ
     finfo_close($finfo);
-    // エラーメッセージ
-    $error = "不正なファイルです";
-    return $error;
+    return;
   }
 
   // ファイルのコンテンツを取得
@@ -22,7 +20,7 @@ if (is_uploaded_file($_FILES['upload_file']['tmp_name'])) {
   // 配列に1文字ずつ格納
   $letters = str_split($contents);
 
-  // asciiの場合、10進数の文字コードに変換
+  // 10進数の文字コードに変換
   $dec_list;
   foreach ($letters as $letter) {
     $dec_list[] = ord($letter);
@@ -35,4 +33,5 @@ if (is_uploaded_file($_FILES['upload_file']['tmp_name'])) {
   }
 
   $bin_contents = implode($bin_list);
+
 }
